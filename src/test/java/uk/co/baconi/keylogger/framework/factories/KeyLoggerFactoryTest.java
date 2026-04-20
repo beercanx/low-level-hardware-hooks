@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.co.baconi.keylogger.framework.impl.WindowsKeyLogger;
 import uk.co.baconi.keylogger.framework.impl.x11.X11KeyLogger;

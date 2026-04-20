@@ -1,6 +1,7 @@
 package uk.co.baconi.keylogger.framework.factories;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import uk.co.baconi.keylogger.framework.constants.PlatformType;
 import uk.co.baconi.keylogger.framework.exceptions.UnsupportedFactoryType;
 import uk.co.baconi.keylogger.framework.exceptions.UnsupportedOperationSytem;
@@ -10,7 +11,7 @@ import java.lang.reflect.Constructor;
 
 abstract class AbstractFactory<Type extends FactoryType<Type>, WindowsImplementation extends Type, X11Implementation extends Type> {
 
-    private final Logger log = Logger.getLogger(getClass());
+    private final Logger log = LogManager.getLogger();
 
     private final PlatformType platformType;
     private final Class<WindowsImplementation> windowsType;

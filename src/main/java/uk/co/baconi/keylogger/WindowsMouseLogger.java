@@ -1,9 +1,11 @@
 package uk.co.baconi.keylogger;
 
 import com.sun.jna.Platform;
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinBase.SYSTEMTIME;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinDef.HMODULE;
 import com.sun.jna.platform.win32.WinDef.LRESULT;
 import com.sun.jna.platform.win32.WinDef.WPARAM;
@@ -89,7 +91,7 @@ public class WindowsMouseLogger {
                 appendToLogFile(wParam.intValue() + "," + info.dx + "," + info.dy + "," + info.mouseData + ","
                         + info.dwFlags + "," + info.time + "," + info.dwExtraInfo + "," + getSystemTime());
             }
-            return lib.CallNextHookEx(hhk, nCode, wParam, info.getPointer());
+            return lib.CallNextHookEx(hhk, nCode, wParam, new WinDef.LPARAM(Pointer.nativeValue(info.getPointer())));
         };
 
         hhk = lib.SetWindowsHookEx(WinUser.WH_MOUSE_LL, mouseHook, hMod, 0);

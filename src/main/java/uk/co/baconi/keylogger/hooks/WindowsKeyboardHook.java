@@ -1,6 +1,8 @@
 package uk.co.baconi.keylogger.hooks;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinDef.LRESULT;
 import com.sun.jna.platform.win32.WinDef.WPARAM;
 import com.sun.jna.platform.win32.WinUser;
@@ -38,6 +40,6 @@ public final class WindowsKeyboardHook implements LowLevelKeyboardProc {
                 }
             }
         }
-        return User32.INSTANCE.CallNextHookEx(parent.getHHOOK(), nCode, wParam, info.getPointer());
+        return User32.INSTANCE.CallNextHookEx(parent.getHHOOK(), nCode, wParam, new WinDef.LPARAM(Pointer.nativeValue(info.getPointer())));
     }
 }

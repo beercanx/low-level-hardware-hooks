@@ -3,7 +3,8 @@ package uk.co.baconi.keylogger.framework.impl.x11;
 import com.sun.jna.platform.unix.X11;
 import com.sun.jna.platform.unix.X11.Display;
 import com.sun.jna.ptr.IntByReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import uk.co.baconi.keylogger.framework.constants.Numbers;
 import uk.co.baconi.keylogger.framework.impl.AbstractImpl;
 import uk.co.baconi.keylogger.framework.interfaces.KeyLogger;
@@ -24,7 +25,7 @@ public final class X11KeyLogger extends AbstractImpl<X11KeyResult> implements Ke
     private static final int _64 = _32 << _1;
     private static final int _128 = _64 << _1;
 
-    private static final Logger LOG = Logger.getLogger(X11KeyLogger.class);
+    private static final Logger LOG = LogManager.getLogger();
 
     private final X11 x11 = X11.INSTANCE;
     private final Display x11Display = x11.XOpenDisplay(null);

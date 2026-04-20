@@ -6,15 +6,15 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 import uk.co.baconi.keylogger.framework.interfaces.FactoryType;
 
 import com.sun.jna.Platform;
 
-@Ignore("Abstract Test Suite.")
-public abstract class FactoryTestSuite<T extends FactoryType<T>, W extends T, X extends T> {
+@Disabled("Abstract Test Suite.")
+abstract class FactoryTestSuite<T extends FactoryType<T>, W extends T, X extends T> {
 
     private final AbstractFactory<T, W, X> instance;
     private final Class<W> windowsClass;
